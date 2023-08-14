@@ -29,7 +29,7 @@ async def predict(
     predictions = MODEL.predict(img_batch)
     
     
-    predicted_class = CLASS_NAMES[np.argmax(predictions[0])]
+    predicted_class = CLASS_NAMES[np.argmax(predictions[1])]
     confidence = np.max(predictions[0])
     return {
         'class': predicted_class,

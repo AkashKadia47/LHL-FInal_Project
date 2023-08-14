@@ -26,8 +26,8 @@ def predict(request):
     if model is None:
         download_blob(
             BUCKET_NAME,
-            "models/latest_potato_model.h5"
-            "/tmp/latest_potato_model.h5"
+            "models/latest_potato_model.h5",
+            "/tmp/latest_potato_model.h5",
         )
 
         model = tf.keras.models.load_model("/tmp/latest_potato_model.h5")
@@ -39,7 +39,10 @@ def predict(request):
     img_array = tf.expand_dims(image,0)
 
     predictions = model.predict(img_array)
-    print(predictions)
+    
+    print("Predictions:",predictions)
 
-    predictions = class_names[np.argmax(predictions[0])]
+    predicted_class = class_names[np.argmax(predictions[0])]
     confidence = round(100 * (np.max(predictions[0])), 2)
+
+    return {"class": predicted_class, "confidence": confidence}
