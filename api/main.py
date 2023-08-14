@@ -7,8 +7,8 @@ import tensorflow as tf
 
 app = FastAPI()
 
-MODEL = tf.keras.models.load_model("../saved_models/1")
-CLASS_NAMES = ['Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy']
+MODEL = tf.keras.models.load_model("../saved_models/2")
+CLASS_NAMES = ['Early Blight', 'Healthy', 'Late Blight']
 
 @app.get("/ping")
 async def ping():
